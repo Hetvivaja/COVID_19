@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Date_wise</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-logo">Graph's</div>
-        <ul class="nav-links">
-            
-            <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
-            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
-            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
-            <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
-    </nav>
-    <div class="content">
-        <center><h2>Date Wise</h2></center>
+{% extends "base.html" %}
+
+{% block title %}Day Wise Trends | COVID-19 Dashboard{% endblock %}
+
+{% block content %}
+<main class="content">
+    <header class="page-header">
+        <p class="eyebrow">Timeline</p>
+        <h1>Day Wise Deaths and Recovered</h1>
+        <p>Track how deaths and recovered cases changed across the dataset timeline.</p>
+    </header>
+
+    <section class="chart-shell">
         {{ plot|safe }}
-    </div>
-</body>
-</html>
+    </section>
+</main>
+{% endblock %}

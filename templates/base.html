@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional COVID-19 analytics dashboard with country and day-wise visualizations.">
+    <title>{% block title %}COVID-19 Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <header class="site-header">
+        <nav class="navbar" aria-label="Primary navigation">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-mark">C19</span>
+                <span class="brand-text">COVID-19 Dashboard</span>
+            </a>
+
+            <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="primary-navigation">
+                <li><a class="{% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}">Home</a></li>
+                <li><a class="{% if request.endpoint == 'total_case' %}active{% endif %}" href="{{ url_for('total_case') }}">Total Cases</a></li>
+                <li><a class="{% if request.endpoint == 'day_wise' %}active{% endif %}" href="{{ url_for('day_wise') }}">Day Wise</a></li>
+                <li><a class="{% if request.endpoint == 'country_wise' %}active{% endif %}" href="{{ url_for('country_wise') }}">Country Wise</a></li>
+                <li><a class="{% if request.endpoint in ['pie_chart', 'country_pie'] %}active{% endif %}" href="{{ url_for('pie_chart') }}">Country Detail</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="site-footer">
+        <p>COVID-19 analytics dashboard built with Flask, Pandas, and Plotly.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

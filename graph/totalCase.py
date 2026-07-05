@@ -1,34 +1,39 @@
+from pathlib import Path
+
 import pandas as pd
 import plotly.graph_objs as go
 
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
+
 
 def create_total():
-    df = pd.read_csv('D:/My_first/data/worldometer.csv',usecols=['Country/Region','TotalCases'])
+    df = pd.read_csv(DATA_DIR / "worldometer.csv", usecols=['Country/Region', 'TotalCases'])
 
-    avg_case = df.groupby('Country/Region')['TotalCases'].mean().sort_values(ascending=False)
+    avg_case = (
+        df.groupby('Country/Region')['TotalCases']
+        .mean()
+        .sort_values(ascending=False)
+        .head(25)
+        .sort_values()
+    )
 
-# Create a Plotly chart
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(
-    x=avg_case.index,
-    y=avg_case.values,
-    mode='lines+markers',
-    line=dict(color='purple'),
-    name='Avg Total Cases',
-    hovertemplate='Country: %{x}<br>Avg Cases: %{y}<extra></extra>'
+    fig.add_trace(go.Bar(
+    x=avg_case.values,
+    y=avg_case.index,
+    orientation='h',
+    marker_color='#0f766e',
+    name='Total Cases',
+    hovertemplate='Country: %{y}<br>Total Cases: %{x:,}<extra></extra>'
     ))
 
-# Update layout
     fig.update_layout(
-    title='Average TotalCases by Country',
-    xaxis_title='Country',
-    yaxis_title='Average TotalCases',
-    xaxis_tickangle=-45,
+    title='Top 25 Countries by Total Cases',
+    xaxis_title='Total Cases',
+    yaxis_title='Country',
     template='plotly_white',
-    height=600,
-    width=1500
+    height=720,
+    margin=dict(l=120, r=30, t=70, b=60)
     )
     return fig
-
-# fig.show()

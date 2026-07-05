@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Pie Chart</title>
-</head>
-<style>
-    a{
-     color: black;
-    text-decoration: none;
-    padding: 8px 10px;
-    display: block;
-    font-size: 20px;
-    }
-</style>
-<body>
-    <center><h1> Chart for {{ country }}</h1></center>
+{% extends "base.html" %}
 
-   <h3>Pie Chart (Death,Recover,Active)</h3>
-   {{pie_plot|safe}}  
+{% block title %}{{ country }} Charts | COVID-19 Dashboard{% endblock %}
 
-   <h3>Bar Chart (Death,Recover,Active)</h3>
-  {{ bar_plot|safe }}<br><br>
+{% block content %}
+<main class="content">
+    <header class="page-header detail-header">
+        <div>
+            <p class="eyebrow">Selected country</p>
+            <h1>Charts for {{ country }}</h1>
+            <p>Detailed distribution of deaths, recovered, and active cases.</p>
+        </div>
+        <a class="button-secondary" href="{{ url_for('pie_chart') }}">&larr; Change Country</a>
+    </header>
 
-    <a href="{{ url_for('pie_chart') }}">← Back to select Another Country</a>
-</body>
-</html>
+    <section class="chart-grid">
+        <article class="chart-shell">
+            <h2>Case Distribution</h2>
+            {{ pie_plot|safe }}
+        </article>
+        <article class="chart-shell">
+            <h2>Case Breakdown</h2>
+            {{ bar_plot|safe }}
+        </article>
+    </section>
+</main>
+{% endblock %}

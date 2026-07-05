@@ -1,31 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>My Project</title>
-    <link  rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-</head>
-<body class="my-img">
-    <nav class="navbar">
-        <div class="nav-logo">Graph's</div>
-        <ul class="nav-links">
-            
-           <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
-            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
-            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
-         <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
-        </ul>
-    </nav>
-    <div class="content">
-        
-    </div>
-</body>
-</html>
- <!-- <li class="dropdown"><a href="#">Service ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="#">TotalCase</a></li>
-                <li><a href="#">Day_wise</a></li>
-                <li><a href="#">Country_wise</a></li>
-            </ul>
-            </li> -->
+{% extends "base.html" %}
 
+{% block title %}COVID-19 Dashboard{% endblock %}
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Global COVID-19 analytics</p>
+            <h1>Track cases, recoveries, and country trends with clear visual insight.</h1>
+            <p class="hero-copy">A responsive dashboard for exploring COVID-19 data through focused charts, readable summaries, and country-level breakdowns.</p>
+            <div class="hero-actions">
+                <a class="button-primary" href="{{ url_for('total_case') }}">Explore Charts</a>
+                <a class="button-secondary" href="{{ url_for('pie_chart') }}">Country Analysis</a>
+            </div>
+        </div>
+
+        <div class="hero-card" aria-label="Global summary">
+            <div class="hero-card-header">
+                <span>Current dataset summary</span>
+                <strong>Global View</strong>
+            </div>
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span>Countries</span>
+                    <strong>{{ totals.countries }}</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Deaths</span>
+                    <strong>{{ totals.deaths }}</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Recovered</span>
+                    <strong>{{ totals.recovered }}</strong>
+                </article>
+                <article class="stat-card">
+                    <span>Active</span>
+                    <strong>{{ totals.active }}</strong>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-band">
+        <div class="feature">
+            <span>01</span>
+            <h2>Total Case Overview</h2>
+            <p>Compare the highest affected countries with a focused horizontal chart.</p>
+        </div>
+        <div class="feature">
+            <span>02</span>
+            <h2>Day Wise Trends</h2>
+            <p>Review deaths and recovered counts over time with cleaner line visualization.</p>
+        </div>
+        <div class="feature">
+            <span>03</span>
+            <h2>Country Detail</h2>
+            <p>Select any country and inspect its deaths, recovered, and active distribution.</p>
+        </div>
+    </section>
+</main>
+{% endblock %}

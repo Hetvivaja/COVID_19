@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Country_wise</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-logo">Graph's</div>
-        <ul class="nav-links">
-            
-            <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
-            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
-            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
-            <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
-        </ul>
-    </nav>
-    <div class="content">
-       <center> <h2>Country Wise</h2></center>
+{% extends "base.html" %}
+
+{% block title %}Country Wise | COVID-19 Dashboard{% endblock %}
+
+{% block content %}
+<main class="content">
+    <header class="page-header">
+        <p class="eyebrow">Comparison</p>
+        <h1>Country Wise Case Breakdown</h1>
+        <p>Compare deaths, recovered, and active cases across the highest-impact countries.</p>
+    </header>
+
+    <section class="chart-shell">
         {{ plot|safe }}
-    </div>
-</body>
-</html>
+    </section>
+</main>
+{% endblock %}
