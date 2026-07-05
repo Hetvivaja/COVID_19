@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country_wise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">Graph's</div>
+        <ul class="nav-links">
+            
+            <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
+            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
+            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
+            <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
+        </ul>
+    </nav>
+    <div class="content">
+       <center> <h2>Country Wise</h2></center>
+        {{ plot|safe }}
+    </div>
+</body>
+</html>

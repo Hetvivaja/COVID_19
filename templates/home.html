@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>My Project</title>
+    <link  rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body class="my-img">
+    <nav class="navbar">
+        <div class="nav-logo">Graph's</div>
+        <ul class="nav-links">
+            
+           <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
+            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
+            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
+         <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
+        </ul>
+    </nav>
+    <div class="content">
+        
+    </div>
+</body>
+</html>
+ <!-- <li class="dropdown"><a href="#">Service ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">TotalCase</a></li>
+                <li><a href="#">Day_wise</a></li>
+                <li><a href="#">Country_wise</a></li>
+            </ul>
+            </li> -->
+

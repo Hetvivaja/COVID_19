@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pie Chart</title>
+</head>
+<style>
+    a{
+     color: black;
+    text-decoration: none;
+    padding: 8px 10px;
+    display: block;
+    font-size: 20px;
+    }
+</style>
+<body>
+    <center><h1> Chart for {{ country }}</h1></center>
+
+   <h3>Pie Chart (Death,Recover,Active)</h3>
+   {{pie_plot|safe}}  
+
+   <h3>Bar Chart (Death,Recover,Active)</h3>
+  {{ bar_plot|safe }}<br><br>
+
+    <a href="{{ url_for('pie_chart') }}">← Back to select Another Country</a>
+</body>
+</html>

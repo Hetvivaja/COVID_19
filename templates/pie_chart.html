@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Country</title>
+    <link  rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+     <nav class="navbar">
+        <div class="nav-logo">Graph's</div>
+        <ul class="nav-links">
+            
+           <li><a href="{{ url_for('total_case') }}">TotalCase</a></li>
+            <li><a href="{{ url_for('day_wise') }}">Day_wise</a></li>
+            <li><a href="{{ url_for('country_wise') }}">Country_wise</a></li> 
+         <li><a href="{{ url_for('pie_chart') }}">Select_country</a></li> 
+        </ul>
+    </nav> 
+    <form method="POST" action="{{ url_for('country_pie') }}">
+          <center><h2>Select a Country for Pie Chart</h2><br><br></center>
+        <select name="country">
+            {% for country in countries %}
+                <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Show Chart</button>
+    </form>
+    <br><hr><br>
+    <h2 style="text-align: center;">Top Countries Summaries</h2>
+    <div class="box-container">
+        {%for box in boxes%}
+        <div class="country-box">
+            <h3>{{box["Country/Region"]}}</h3>
+            <p><strong>Deaths:</strong>{{box["Deaths"]}}</p>
+            <p><strong>Recovered:</strong>{{box["Recovered"]}}</p>
+             <p><strong>Active:</strong>{{box["Active"]}}</p>
+        </div>
+        {%endfor%}
+    </div>
+</body>
+</html>
