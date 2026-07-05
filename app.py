@@ -1,23 +1,25 @@
-from pathlib import Path
-
 from flask import Flask, abort, render_template, request
-import pandas as pd
 import plotly.io as pio
+from graph.common import CASE_COLUMNS, read_data
 from graph.totalCase import create_total
 from graph.day_wise import create_day
 from graph.country_de_re_ac import create_country
 from graph.pie_chart import create_data
 
 app = Flask(__name__)
-DATA_DIR = Path(__file__).resolve().parent / "data"
 
 
 def chart_html(fig):
     return pio.to_html(fig, full_html=False, config={"responsive": True})
 
+
+def country_summary():
+    return read_data("country.csv", usecols=CASE_COLUMNS)
+
+
 @app.route('/')
 def home():
-    df = pd.read_csv(DATA_DIR / "country.csv", usecols=['Country/Region', 'Deaths', 'Recovered', 'Active'])
+    df = country_summary()
     totals = {
         "countries": df["Country/Region"].nunique(),
         "deaths": f"{int(df['Deaths'].sum()):,}",
@@ -46,7 +48,7 @@ def country_wise():
 
 @app.route('/piechart')
 def pie_chart():
-    df = pd.read_csv(DATA_DIR / "country.csv", usecols=['Country/Region', 'Deaths', 'Recovered', 'Active'])
+    df = country_summary()
     countries = sorted(df["Country/Region"].unique())
 
     top_country = (
